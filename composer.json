@@ -1,0 +1,19 @@
+{
+    "name": "josueob/hourly-payment",
+    "description": "Project that allows you to calculate an employee's pay based on the days and hours worked.",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JosueOb",
+            "email": "josuericardocando@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
