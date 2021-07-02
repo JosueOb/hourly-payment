@@ -5,7 +5,7 @@ namespace App\Models;
 class Type
 {
     public string $name;
-    public string $slug = "";
+    public string $slug;
 
     public function __construct(string $name)
     {

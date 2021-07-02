@@ -18,7 +18,7 @@ class TypeController
         $name = new TextRule($type_name);
 
         if (!$name->isValid()) {
-            throw new Exception("The type name $type_name is invalid.", 1);
+            throw new Exception("The type name $name->content is invalid.", 1);
         }
 
         return new Type($name->content);

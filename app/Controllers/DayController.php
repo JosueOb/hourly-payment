@@ -23,12 +23,12 @@ class DayController
         $abbreviation = new AbbreviationRule($day_abbreviation);
 
         if (!$name->isValid()) {
-            throw new Exception("The name of day $day_name is invalid.", 1);
+            throw new Exception("The name of day $name->content is invalid.", 1);
         }
         if (!$abbreviation->isValid()) {
-            throw new Exception("The abbreviation of day $day_abbreviation is invalid.", 1);
+            throw new Exception("The abbreviation of day $abbreviation->content is invalid.", 1);
         }
 
-        return new Day($name->content, $abbreviation->content, $type);
+        return new Day($name->content, strtoupper($abbreviation->content), $type);
     }
 }
