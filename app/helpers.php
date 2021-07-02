@@ -2,9 +2,11 @@
 
 use App\Controllers\DayController;
 use App\Controllers\PeriodController;
+use App\Controllers\PriceController;
 use App\Controllers\TypeController;
 use App\Models\Day;
 use App\Models\Period;
+use App\Models\Price;
 use App\Models\Type;
 
 /**
@@ -29,4 +31,12 @@ function createDay($name, $abbreviation, $type): Day
 function createPeriod($start, $end): Period
 {
     return PeriodController::create($start, $end);
+}
+
+/**
+ * @throws Exception
+ */
+function createPrice($type, $period, $value): Price
+{
+    return PriceController::create($type, $period, $value);
 }

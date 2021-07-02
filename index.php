@@ -31,6 +31,20 @@ try {
     $night = createPeriod("18:01", "00:00");
     //var_dump($morning, $afternoon, $night);
 
+    //Prices
+    $wm_price = createPrice($working_day, $morning, "25");
+    $wa_price = createPrice($working_day, $afternoon, "25");
+    $wn_price = createPrice($working_day, $night, "20");
+    $hm_price = createPrice($holiday, $morning, "30");
+    $ha_price = createPrice($holiday, $afternoon, "20");
+    $hn_price = createPrice($holiday, $night, "25");
+    //var_dump($wm_price, $wa_price, $wn_price);
+    //var_dump($hm_price, $ha_price, $hn_price);
+
+    $prices = [$wm_price, $wa_price, $wn_price, $hm_price, $ha_price, $hn_price];
+    //var_dump($prices);
+
+
 } catch (Exception $e) {
     echo "Error: {$e->getMessage()} \n";
     die();
