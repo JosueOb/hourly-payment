@@ -9,18 +9,18 @@ use Exception;
 class TypeController
 {
     /**
-     * @param string $name
+     * @param string $type_name
      * @return Type
      * @throws Exception
      */
-    static function create(string $name): Type
+    static function create(string $type_name): Type
     {
-        $text = new TextRule($name);
+        $name = new TextRule($type_name);
 
-        if ($text->isValid()) {
-            return new Type($text->content);
-        } else {
-            throw new Exception("The type name $name is invalid.", 1);
+        if (!$name->isValid()) {
+            throw new Exception("The type name $type_name is invalid.", 1);
         }
+
+        return new Type($name->content);
     }
 }
