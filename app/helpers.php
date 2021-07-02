@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\DayController;
+use App\Controllers\FileController;
 use App\Controllers\PeriodController;
 use App\Controllers\PriceController;
 use App\Controllers\TypeController;
@@ -39,4 +40,12 @@ function createPeriod($start, $end): Period
 function createPrice($type, $period, $value): Price
 {
     return PriceController::create($type, $period, $value);
+}
+
+/**
+ * @throws Exception
+ */
+function redFile($file): array
+{
+    return FileController::readFile($file);
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Controllers\FileController;
+
 require __DIR__ . "/vendor/autoload.php";
 
 /**
@@ -44,7 +46,9 @@ try {
     $prices = [$wm_price, $wa_price, $wn_price, $hm_price, $ha_price, $hn_price];
     //var_dump($prices);
 
-
+    //File
+    $file = redFile("data.txt");
+    var_dump($file);
 } catch (Exception $e) {
     echo "Error: {$e->getMessage()} \n";
     die();
