@@ -1,7 +1,5 @@
 <?php
 
-use App\Controllers\TypeController;
-
 require __DIR__ . "/vendor/autoload.php";
 
 /**
@@ -26,6 +24,13 @@ try {
 
     $days = [$monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $saturday];
     //var_dump($days);
+
+    //Periods
+    $morning = createPeriod("00:01", "09:00");
+    $afternoon = createPeriod("09:01", "18:00");
+    $night = createPeriod("18:01", "00:00");
+    //var_dump($morning, $afternoon, $night);
+
 } catch (Exception $e) {
     echo "Error: {$e->getMessage()} \n";
     die();

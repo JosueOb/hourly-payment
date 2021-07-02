@@ -1,8 +1,10 @@
 <?php
 
 use App\Controllers\DayController;
+use App\Controllers\PeriodController;
 use App\Controllers\TypeController;
 use App\Models\Day;
+use App\Models\Period;
 use App\Models\Type;
 
 /**
@@ -19,4 +21,12 @@ function createType($name): Type
 function createDay($name, $abbreviation, $type): Day
 {
     return DayController::create($name, $abbreviation, $type);
+}
+
+/**
+ * @throws Exception
+ */
+function createPeriod($start, $end): Period
+{
+    return PeriodController::create($start, $end);
 }
