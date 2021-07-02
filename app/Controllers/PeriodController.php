@@ -30,18 +30,14 @@ class PeriodController
         $start_date = DateTime::createFromFormat("!H:i", $start->content);
         $end_date = DateTime::createFromFormat("!H:i", $end->content);
 
-        $start = $start_date;
-        $end = $end_date;
-
-        if ($end == DateTime::createFromFormat("!H:i", "00:00")) {
-            $end = $end->modify("+1 day");
+        if ($end_date == DateTime::createFromFormat("!H:i", "00:00")) {
+            $end_date = $end_date->modify("+1 day");
         }
 
         if ($start_date > $end_date) {
-            $start = $end_date;
-            $end = $start_date;
+            throw new Exception("The first hour $start->content must be less than the second hour $end->content.", 1);
         }
 
-        return new Period($start, $end);
+        return new Period($start_date, $end_date);
     }
 }
