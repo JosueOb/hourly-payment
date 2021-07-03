@@ -27,7 +27,7 @@ class PriceController
             throw new Exception("The price $number->content is invalid.", 1);
         }
 
-        $search_prices = self::searchPriceByType($prices, $type->slug);
+        $search_prices = searchPriceByType($prices, $type->slug);
         if (!empty($search_prices)) {
             foreach ($search_prices as $price) {
                 if (
