@@ -5,7 +5,7 @@ namespace App\Rules;
 
 class AbbreviationRule extends Rule
 {
-    protected string $pattern = "/^[a-zA-Z]{2,3}+$/";
+    protected string $pattern = "/^[a-zA-Z]{2}+$/";
     public string $content;
 
     public function __construct(string $content)
