@@ -38,6 +38,10 @@ class PeriodController
             throw new Exception("The first hour $start->content must be less than the second hour $end->content.", 1);
         }
 
+        if ($start_date === $end_date) {
+            throw new Exception("The first hour $start->content must be different from the second hour $end->content.", 1);
+        }
+
         return new Period($start_date, $end_date);
     }
 }
