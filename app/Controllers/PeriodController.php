@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\Period;
 use App\Rules\HourRule;
-use DateTime;
 use Exception;
 
 class PeriodController
@@ -27,10 +26,11 @@ class PeriodController
             throw new Exception("The end time $end->content is invalid.", 1);
         }
 
-        $start_date = DateTime::createFromFormat("!H:i", $start->content);
-        $end_date = DateTime::createFromFormat("!H:i", $end->content);
+        $start_date = createDate($start->content);
+        $end_date = createDate($end->content);
 
-        if ($end_date == DateTime::createFromFormat("!H:i", "00:00")) {
+
+        if ($end_date == createDate("00:00")) {
             $end_date = $end_date->modify("+1 day");
         }
 
