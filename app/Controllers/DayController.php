@@ -53,4 +53,17 @@ class DayController
             )
         );
     }
+
+    /**
+     * @param array $days
+     * @return array
+     */
+    static function getAbbreviations(array $days): array
+    {
+        $abbreviations = [];
+        foreach ($days as $day){
+            array_push($abbreviations, $day->abbreviation);
+        }
+        return $abbreviations;
+    }
 }
