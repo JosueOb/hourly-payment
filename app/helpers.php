@@ -57,9 +57,9 @@ if (!function_exists('redFile')) {
     /**
      * @throws Exception
      */
-    function redFile($file): array
+    function redFile($file, $days): array
     {
-        return FileController::readFile($file);
+        return FileController::readFile($file, $days);
     }
 }
 
@@ -120,5 +120,11 @@ if (!function_exists('createDate')) {
     function createDate($date): DateTime|bool
     {
         return DateTime::createFromFormat("!H:i", $date);
+    }
+}
+if (!function_exists('getAbbreviations')) {
+    function getAbbreviations($days): array
+    {
+        return DayController::getAbbreviations($days);
     }
 }
