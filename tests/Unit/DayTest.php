@@ -2,8 +2,6 @@
 
 namespace Test\Unit;
 
-use App\Controllers\DayController;
-use App\Controllers\TypeController;
 use App\Models\Day;
 use App\Models\Type;
 use Exception;
@@ -16,10 +14,39 @@ class DayTest extends TestCase
      */
     public function testCreateDay()
     {
-        $type = TypeController::create("Working Day");
-        $day = DayController::create("Monday", "MO", $type);
+        $type = createType("Working Day");
+
+        $days = [
+            //createDay([], 'Monday', "MO", $type)
+        ];
+
+        $day = createDay($days, 'Monday', "MO", $type);
 
         $this->assertInstanceOf(Day::class, $day);
         $this->assertInstanceOf(Type::class, $day->type);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testSearchDayByAbbreviation()
+    {
+        //Types
+        $working_day = createType("Working Day");
+        $holiday = createType("Holiday");
+
+        //Days
+        $days = [];
+        $monday = createDay($days, "Monday", "MO", $working_day);
+        array_push($days, $monday);
+        $sunday = createDay($days, "Sunday", "SU", $holiday);
+        array_push($days, $sunday);
+
+        $search_days1 = searchDayByAbbreviation($days, 'SU');
+        $search_days2 = searchDayByAbbreviation($days, 'HELLO');
+
+        $this->assertIsArray($search_days1);
+        $this->assertInstanceOf(Day::class, $search_days1[0]);
+        $this->assertEmpty($search_days2);
     }
 }
