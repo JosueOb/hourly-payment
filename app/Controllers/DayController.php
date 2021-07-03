@@ -30,7 +30,7 @@ class DayController
             throw new Exception("The abbreviation of day $abbreviation->content is invalid.", 1);
         }
 
-        if (!empty(self::searchDayByAbbreviation($days, $abbreviation->content))) {
+        if (!empty(searchDayByAbbreviation($days, $abbreviation->content))) {
             throw new Exception("Abbreviation of the day $abbreviation->content already recorded.", 1);
         }
 
