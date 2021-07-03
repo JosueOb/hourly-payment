@@ -17,14 +17,14 @@ class PriceTest extends TestCase
      */
     public function testCreatePeriod()
     {
-        $type = TypeController::create("Working Day");
-        $morning = PeriodController::create("09:00", "18:00");
+        $type = createType("Working Day");
+        $morning = createPeriod("09:00", "18:00");
 
         $prices = [
             //PriceController::create([], $type, $morning, "15")
         ];
 
-        $price = PriceController::create($prices, $type, $morning, "15");
+        $price = createPrice($prices, $type, $morning, "15");
 
         $this->assertInstanceOf(Price::class, $price);
     }
@@ -41,7 +41,7 @@ class PriceTest extends TestCase
         //Periods
         $morning = createPeriod("00:01", "09:00");
         $afternoon = createPeriod("09:01", "18:00");
-        
+
         //Prices
         $prices = [];
         $wm_price = createPrice($prices, $working_day, $morning, "25");
