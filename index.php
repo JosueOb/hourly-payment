@@ -1,57 +1,71 @@
 <?php
 
-use App\Controllers\FileController;
-
 require __DIR__ . "/vendor/autoload.php";
 
-/**
- * Records
- */
 
 try {
+    /**
+     * Records
+     */
+
     //Types
     $working_day = createType("Working Day");
     $holiday = createType("Holiday");
-    //var_dump($working_day, $holiday);
-
-    //Days
-    $monday = createDay("Monday", "MO", $working_day);
-    $tuesday = createDay("Tuesday", "TU", $working_day);
-    $wednesday = createDay("Wednesday", "WE", $working_day);
-    $thursday = createDay("Thursday", "TH", $working_day);
-    $friday = createDay("Friday", "FR", $working_day);
-    $saturday = createDay("Saturday", "SA", $holiday);
-    $sunday = createDay("Sunday", "SU", $holiday);
-    //var_dump($monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $saturday);
-
-    $days = [$monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $saturday];
-    //var_dump($days);
 
     //Periods
     $morning = createPeriod("00:01", "09:00");
     $afternoon = createPeriod("09:01", "18:00");
     $night = createPeriod("18:01", "00:00");
-    //var_dump($morning, $afternoon, $night);
+
+    //Days
+    $days = [];
+    $monday = createDay($days, "Monday", "MO", $working_day);
+    array_push($days, $monday);
+    $tuesday = createDay($days, "Tuesday", "TU", $working_day);
+    array_push($days, $tuesday);
+    $wednesday = createDay($days, "Wednesday", "WE", $working_day);
+    array_push($days, $wednesday);
+    $thursday = createDay($days, "Thursday", "TH", $working_day);
+    array_push($days, $thursday);
+    $friday = createDay($days, "Friday", "FR", $working_day);
+    array_push($days, $friday);
+    $saturday = createDay($days, "Saturday", "SA", $holiday);
+    array_push($days, $saturday);
+    $sunday = createDay($days, "Sunday", "SU", $holiday);
+    array_push($days, $sunday);
 
     //Prices
-    $wm_price = createPrice($working_day, $morning, "25");
-    $wa_price = createPrice($working_day, $afternoon, "25");
-    $wn_price = createPrice($working_day, $night, "20");
-    $hm_price = createPrice($holiday, $morning, "30");
-    $ha_price = createPrice($holiday, $afternoon, "20");
-    $hn_price = createPrice($holiday, $night, "25");
-    //var_dump($wm_price, $wa_price, $wn_price);
-    //var_dump($hm_price, $ha_price, $hn_price);
+    $prices = [];
+    $wm_price = createPrice($prices, $working_day, $morning, "25");
+    array_push($prices, $wm_price);
+    $wa_price = createPrice($prices, $working_day, $afternoon, "15");
+    array_push($prices, $wa_price);
+    $wn_price = createPrice($prices, $working_day, $night, "20");
+    array_push($prices, $wn_price);
+    $hm_price = createPrice($prices, $holiday, $morning, "30");
+    array_push($prices, $hm_price);
+    $ha_price = createPrice($prices, $holiday, $afternoon, "20");
+    array_push($prices, $ha_price);
+    $hn_price = createPrice($prices, $holiday, $night, "25");
+    array_push($prices, $hn_price);
 
-    $prices = [$wm_price, $wa_price, $wn_price, $hm_price, $ha_price, $hn_price];
-    //var_dump($prices);
+    /**
+     * Get records from a file .txt
+     */
 
     //File
-    $file = redFile("data.txt");
-    var_dump($file);
+    $file = redFile("data.txt", $days);
+
+    /**
+     * Get payment set
+     */
+    $payments = getPayments($file, $days, $prices);
+
+    /**
+     * Show payments
+     */
+    showPayments($payments);
 } catch (Exception $e) {
     echo "Error: {$e->getMessage()} \n";
     die();
 }
-
-echo "Continua...\n";
