@@ -12,10 +12,11 @@ class FileController
 
     /**
      * @param string $file_path
+     * @param array $days
      * @return array
      * @throws Exception
      */
-    static function readFile(string $file_path): array
+    static function readFile(string $file_path, array $days): array
     {
         if (!is_file($file_path)) {
             throw new Exception("File not found.", 1);
@@ -31,11 +32,12 @@ class FileController
         $file_open = fopen($file_path, "r");
         $position = 0; //pointer
         $content = [];
+        $day_abbreviations = getAbbreviations($days);
 
         while (!feof($file_open)) {
             $position++;
             $line = fgets($file_open);
-            $line = new FileContentRule($line);
+            $line = new FileContentRule($line, $day_abbreviations);
 
             if (!$line->isValid()) {
                 fclose($file_open);
