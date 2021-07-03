@@ -13,7 +13,7 @@ class FileTest extends TestCase
      */
     public function testReadFile()
     {
-        $file_content = FileController::readFile('data.txt');
+        $file_content = redFile('data.txt');
 
         $this->assertIsArray($file_content);
     }
