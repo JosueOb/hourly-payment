@@ -11,13 +11,14 @@ use Exception;
 class DayController
 {
     /**
+     * @param array $days
      * @param string $day_name
      * @param string $day_abbreviation
      * @param Type $type
      * @return Day
      * @throws Exception
      */
-    static function create(string $day_name, string $day_abbreviation, Type $type): Day
+    static function create(array $days, string $day_name, string $day_abbreviation, Type $type): Day
     {
         $name = new TextRule($day_name);
         $abbreviation = new AbbreviationRule($day_abbreviation);
@@ -29,6 +30,27 @@ class DayController
             throw new Exception("The abbreviation of day $abbreviation->content is invalid.", 1);
         }
 
+        if (!empty(self::searchDayByAbbreviation($days, $abbreviation->content))) {
+            throw new Exception("Abbreviation of the day $abbreviation->content already recorded.", 1);
+        }
+
         return new Day($name->content, strtoupper($abbreviation->content), $type);
+    }
+
+    /**
+     * @param array $days
+     * @param string $search
+     * @return array
+     */
+    static function searchDayByAbbreviation(array $days, string $search): array
+    {
+        return array_values(
+            array_filter(
+                $days,
+                function (Day $day) use ($search) {
+                    return $day->abbreviation === $search;
+                }
+            )
+        );
     }
 }
