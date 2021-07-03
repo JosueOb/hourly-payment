@@ -14,7 +14,7 @@ class TypeTest extends TestCase
      */
     public function testCreateType()
     {
-        $type = TypeController::create("Working Day");
+        $type = createType("Working Day");
         $slug = $type->slug;
 
         $this->assertInstanceOf(Type::class, $type);
