@@ -14,7 +14,7 @@ class PeriodTest extends TestCase
      */
     public function testCreateType()
     {
-        $morning = PeriodController::create("09:00", "18:00");
+        $morning = createPeriod("09:00", "18:00");
         $period = $morning->getPeriod();
 
         $this->assertInstanceOf(Period::class, $morning);
